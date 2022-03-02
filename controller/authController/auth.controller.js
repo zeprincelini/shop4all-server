@@ -5,6 +5,7 @@ const User = require("../../models/user");
 //scripts imports
 const resetTemplate = require("../../helper/email/resetPassword");
 const mailgunClient = require("../../helper/email/mailgun");
+const mg = require("../../helper/email/mailgun");
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -67,7 +68,7 @@ const loginUser = async (req, res) => {
 };
 
 const forgotPassword = async (req, res) => {
-  const email = req.body.email;
+  const email = req.params.email;
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -100,4 +101,5 @@ const forgotPassword = async (req, res) => {
 module.exports = {
   createUser,
   loginUser,
+  forgotPassword,
 };

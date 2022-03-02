@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const helmet = require("helmet");
 const morgan = require("morgan");
 //db
@@ -9,7 +9,6 @@ db();
 //
 const userRoute = require("./route/userRoute/user");
 
-dotenv.config();
 const app = express();
 
 app.use(express.json());
