@@ -1,6 +1,6 @@
 const mailgun = require("./mailgun");
 
-const mailList = async () => {
+const mailList = async (req, res) => {
   const email = req.params.email;
   try {
     const newMember = await mailgun.lists.members.createMember(

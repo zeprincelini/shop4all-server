@@ -6,17 +6,22 @@ const morgan = require("morgan");
 //db
 const db = require("./db/sync");
 db();
-//
-const userRoute = require("./route/userRoute/user");
+//routes import
+const authRoute = require("./route/authRoute/auth");
 
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+  })
+);
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use("/api/auth", userRoute);
+app.use("/api/auth", authRoute);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
